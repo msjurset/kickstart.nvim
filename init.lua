@@ -87,11 +87,19 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Set leader key (optional, as backslash is default)
+-- vim.g.mapleader = "\\"
+
+-- set leader key to <Space> in NORMAL mode.
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Map k and j to page-up/down respectively.
+vim.keymap.set('n', '<Leader>j', '<C-f>', { desc = 'Page-down: move focus down by one page' })
+vim.keymap.set('n', '<Leader>k', '<C-b>', { desc = 'Page-up: move focus up by one page' })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +110,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+--  vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -234,6 +242,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'wolandark/vim-loremipsum',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -931,6 +940,9 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
+      -- Annimated scrolling
+      require('mini.animate').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
